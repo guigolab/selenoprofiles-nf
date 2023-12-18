@@ -1,0 +1,6 @@
+.nextflow
+.nextflow*
+work
+output/*
+assemblies
+selenoprofiles_data
