@@ -53,8 +53,6 @@ process PARSE_FASTA_HEADER {
 
 process UNZIP_FASTA {
 
-    conda "${projectDir}/conda-env.yaml"
-
     tag "${id}"
 
     input:
@@ -72,9 +70,9 @@ process UNZIP_FASTA {
 
 process RUN_SELENOPROFILES {
 
-    conda "${projectDir}/conda-env.yaml"
+    container "sp:latest"
 
-    publishDir "${params.outdir}/${taxid}", mode: 'copy'
+    publishDir "${params.outdir}", mode: 'copy'
 
     tag "${id}"
 
@@ -88,7 +86,7 @@ process RUN_SELENOPROFILES {
     genome_name = genome.BaseName
 
     """
-    selenoprofiles -config ${projectDir}/.selenoprofiles_config.txt -o . -t ${genome} -s "${scientific_name}" -p ${params.selenoprofile}
+    selenoprofiles -o ./${taxid} -t ${genome} -s "${scientific_name}" -p ${params.selenoprofile}
     """
 }
 
