@@ -70,7 +70,7 @@ process UNZIP_FASTA {
 
 process RUN_SELENOPROFILES {
 
-    container "sp:latest"
+    container "maxtico/container_selenoprofiles:latest"
 
     publishDir "${params.outdir}", mode: 'copy'
 
