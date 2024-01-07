@@ -90,6 +90,23 @@ process RUN_SELENOPROFILES {
     """
 }
 
+
+process DOWNLOAD_NCBI_ANNOTATION {
+
+    container "datasets"
+
+    input:
+    tuple val(id), val(taxid), val(scientific_name),path(fasta)
+
+    output:
+    tuple val(id),val(gff_path)
+
+    script:
+    """
+    ./datasets download genome accession ${id} --include gff3 --filename ${id}.zip
+    """
+
+}
 workflow {
 
     if (params.tsv) { tsv_input = file(params.tsv) } else {
